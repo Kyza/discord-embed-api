@@ -59,9 +59,9 @@ http.createServer(function(request, response) {
       <meta content="` + embeds[embedID].imageUrl + `" property="og:image">
       <meta content="` + embeds[embedID].color + `" name="theme-color">
 
+      ` + (embeds[embedID].banner ? `<meta name="twitter:card" content="summary_large_image">` : "") + `
+
       <link type="application/json+oembed" href="./embed/` + embedID + `.json" />
-      
-      `(embeds[embedID].banner ? `<meta name="twitter:card" content="summary_large_image">` : "")`
       `;
 
       response.writeHead(200, {
