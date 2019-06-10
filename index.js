@@ -26,6 +26,9 @@ http.createServer(function(request, response) {
     console.log("User requested an embed: " + url);
 
     var embedID = randomString(10);
+    while (embeds[embedID]) {
+      embedID = randomString(10);
+    }
     embeds[embedID] = {
       providerName: "providerName",
       providerUrl: "providerUrl",
