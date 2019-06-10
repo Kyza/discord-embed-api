@@ -44,7 +44,7 @@ http.createServer(function(request, response) {
     response.writeHead(200, {
       'Content-Type': 'text/plain'
     });
-    response.end("embedID");
+    response.end("/get-embed/" + embedID);
   } else if (url.startsWith("/get-embed/")) {
     var embedID = url.replace("/get-embed/", "");
 
