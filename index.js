@@ -23,7 +23,7 @@ http.createServer(function(request, response) {
     fs.createReadStream("./favicon.ico").pipe(response);
     return;
   } else if (url.startsWith("/create")) {
-    console.log("User requested an embed: " + req.url);
+    console.log("User requested an embed: " + url);
 
     embeds[randomString(10)] = randomString(5);
 
