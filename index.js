@@ -69,6 +69,7 @@ http.createServer(function(request, response) {
       });
       response.end(html);
     } else {
+      embedID = embedID.replace(".json", "");
       var json = {
         provider_name: embeds[embedID].providerName,
         provider_url: embeds[embedID].providerUrl,
