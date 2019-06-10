@@ -12,16 +12,25 @@ function randomString(length) {
   return result;
 }
 
-http.createServer(function(req, res) {
+http.createServer(function(request, response) {
+  var url = decodeURIComponent(request.url);
+  if (url == "/favicon.ico") {
+    response.writeHead(200, {
+      "Content-Type": "application/octet-stream",
+      "Content-Disposition": "attachment; filename=favicon.ico"
+    });
+    fs.createReadStream("./favicon.ico").pipe(response);
+    return;
+  } else if (url.startsWith("/create")) {
+    console.log("User requested an embed: " + req.url);
 
-  console.log("User requested an embed: " + req.url);
+    embeds[randomString(10)] = randomString(5);
 
-  embeds[randomString(10)] = randomString(5);
-
-  res.writeHead(200, {
-    'Content-Type': 'text/plain'
-  });
-  res.end("I'm gonna send back an embed with this info:", embeds);
+    response.writeHead(200, {
+      'Content-Type': 'text/plain'
+    });
+    response.end("I'm gonna send back an embed with this info:", embeds);
+  }
 }).listen(process.env.PORT || 5000);
 
 console.log("Server started!");
