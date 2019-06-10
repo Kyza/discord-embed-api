@@ -30,6 +30,11 @@ http.createServer(function(request, response) {
       'Content-Type': 'text/plain'
     });
     response.end("I'm gonna send back an embed with this info:", embeds);
+  } else {
+    response.writeHead(200, {
+      'Content-Type': 'text/plain'
+    });
+    response.end("Do you need something?");
   }
 }).listen(process.env.PORT || 5000);
 
