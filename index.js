@@ -14,7 +14,7 @@ function randomString(length) {
 
 http.createServer(function(req, res) {
 
-  console.log(req);
+  console.log("User requested an embed: " + req.url);
 
   embeds[randomString(10)] = randomString(5);
 
