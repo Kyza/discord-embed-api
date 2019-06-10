@@ -92,8 +92,7 @@ http.createServer(function(request, response) {
     }
   } else {
     response.writeHead(200, {
-      "Content-Type": "application/octet-stream",
-      "Content-Disposition": "attachment; filename=index.html"
+      "Content-Type": "text/html"
     });
     fs.createReadStream("./index.html").pipe(response);
     return;
