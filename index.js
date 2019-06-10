@@ -25,12 +25,23 @@ http.createServer(function(request, response) {
   } else if (url.startsWith("/create")) {
     console.log("User requested an embed: " + url);
 
-    embeds[randomString(10)] = randomString(5);
+    var embedID = randomString(10);
+    embeds[embedID] = {
+      providerName: "providerName",
+      providerUrl: "providerUrl",
+      authorName: "authorName",
+      authorUrl: "authorUrl",
+      title: "title",
+      description: "description",
+      imageUrl: "https://image.url/",
+      banner: false,
+      color: "#color"
+    };
 
     response.writeHead(200, {
       'Content-Type': 'text/plain'
     });
-    response.end("I'm gonna send back an embed with this info: " + JSON.stringify(embeds));
+    response.end("I'm gonna send back an embed with this info: " + JSON.stringify(embeds, null, 2));
   } else {
     response.writeHead(200, {
       'Content-Type': 'text/plain'
