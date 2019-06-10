@@ -25,9 +25,9 @@ http.createServer(function(request, response) {
   } else if (url.startsWith("/create")) {
     console.log("User created an embed: " + url);
 
-    var embedID = randomString(5);
+    var embedID = randomString(20);
     while (embeds[embedID]) {
-      embedID = randomString(5);
+      embedID = randomString(20);
     }
 
     embeds[embedID] = {
@@ -69,7 +69,7 @@ http.createServer(function(request, response) {
         response.writeHead(200, {
           'Content-Type': 'text/html'
         });
-        response.end(html);
+        response.end(html + "This page isn't meant to be viewed by users.");
       } else {
         var json = {
           provider_name: embeds[embedID].providerName,
