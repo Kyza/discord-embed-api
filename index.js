@@ -88,7 +88,7 @@ http.createServer(function(request, response) {
       response.writeHead(200, {
         'Content-Type': 'text/html'
       });
-      response.end("The embed you requested no longer exists.");
+      response.end("The embed you requested is invalid or no longer exists.");
     }
   } else {
     response.writeHead(200, {
