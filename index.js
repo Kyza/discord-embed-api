@@ -39,7 +39,7 @@ http.createServer(function(request, response) {
       description: "description",
       imageUrl: "https://image.url/",
       banner: false,
-      color: "#color"
+      color: "#7bbe17"
     };
 
     response.writeHead(200, {
@@ -47,7 +47,7 @@ http.createServer(function(request, response) {
     });
     response.end("/embed/" + embedID);
   } else if (url.startsWith("/embed/")) {
-    var embedID = url.replace("/embed/", "");
+    var embedID = url.replace("/embed/", "").replace(".json", "");
 
     if (!url.endsWith(".json")) {
       var html = `
@@ -55,7 +55,6 @@ http.createServer(function(request, response) {
       <meta content="` + embeds[embedID].title + `" property="og:title">
       <meta content="` + embeds[embedID].description + `" property="og:description">
       <meta content="` + embeds[embedID].description + `" name="description">
-      <meta content="" property="og:url">
       <meta content="` + embeds[embedID].imageUrl + `" property="og:image">
       <meta content="` + embeds[embedID].color + `" name="theme-color">
 
@@ -69,7 +68,6 @@ http.createServer(function(request, response) {
       });
       response.end(html);
     } else {
-      embedID = embedID.replace(".json", "");
       var json = {
         provider_name: embeds[embedID].providerName,
         provider_url: embeds[embedID].providerUrl,
