@@ -74,8 +74,8 @@ http.createServer(function(request, response) {
         var json = {
           provider_name: embeds[embedID].providerName,
           provider_url: embeds[embedID].providerUrl,
-          author_name: embeds[embedID].authorUrl,
-          author_url: embeds[embedID].authorName,
+          author_name: embeds[embedID].authorName,
+          author_url: embeds[embedID].authorUrl,
           type: (embeds[embedID].banner ? "photo" : "")
         };
         response.writeHead(200, {
