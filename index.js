@@ -25,9 +25,9 @@ http.createServer(function(request, response) {
   } else if (url.startsWith("/create")) {
     console.log("User created an embed: " + url);
 
-    var embedID = randomString(10);
+    var embedID = randomString(5);
     while (embeds[embedID]) {
-      embedID = randomString(10);
+      embedID = randomString(5);
     }
 
     embeds[embedID] = {
@@ -37,8 +37,8 @@ http.createServer(function(request, response) {
       authorUrl: "https://author.url/",
       title: "title",
       description: "description",
-      imageUrl: "https://image.url/",
-      banner: false,
+      imageUrl: "https://imageog.flaticon.com/icons/png/512/25/25694.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=FFFFFFFF",
+      banner: true,
       color: "#7bbe17"
     };
 
