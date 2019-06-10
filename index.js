@@ -31,9 +31,9 @@ http.createServer(function(request, response) {
     }
     embeds[embedID] = {
       providerName: "providerName",
-      providerUrl: "providerUrl",
+      providerUrl: "https://provider.url/",
       authorName: "authorName",
-      authorUrl: "authorUrl",
+      authorUrl: "https://author.url/",
       title: "title",
       description: "description",
       imageUrl: "https://image.url/",
