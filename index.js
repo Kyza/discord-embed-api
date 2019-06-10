@@ -23,7 +23,7 @@ http.createServer(function(request, response) {
     fs.createReadStream("./favicon.ico").pipe(response);
     return;
   } else if (url.startsWith("/create")) {
-    console.log("User requested an embed: " + url);
+    console.log("User created an embed: " + url);
 
     var embedID = randomString(10);
     while (embeds[embedID]) {
@@ -46,8 +46,10 @@ http.createServer(function(request, response) {
       'Content-Type': 'text/plain'
     });
     response.end("/embed/" + embedID);
+    console.log("Saved embed at ID: " + embedID);
   } else if (url.startsWith("/embed/")) {
     var embedID = url.replace("/embed/", "").replace(".json", "");
+    console.log("Requested embed: " + embedID);
 
     if (!url.endsWith(".json")) {
       var html = `
