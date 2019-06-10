@@ -92,9 +92,11 @@ http.createServer(function(request, response) {
     }
   } else {
     response.writeHead(200, {
-      'Content-Type': 'text/plain'
+      "Content-Type": "application/octet-stream",
+      "Content-Disposition": "attachment; filename=index.html"
     });
-    response.end("Do you need something?");
+    fs.createReadStream("./index.html").pipe(response);
+    return;
   }
 }).listen(process.env.PORT || 5000);
 
