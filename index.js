@@ -6,6 +6,6 @@ http.createServer(function(req, res) {
     'Content-Type': 'text/plain'
   });
   res.end('Hello HTTP!');
-}).listen(80);
+}).listen(process.env.PORT || 5000);
 
 console.log("Server started!");
