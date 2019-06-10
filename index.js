@@ -49,10 +49,11 @@ http.createServer(function(request, response) {
     console.log("Saved embed at ID: " + embedID);
   } else if (url.startsWith("/embed/")) {
     var embedID = url.replace("/embed/", "").replace(".json", "");
-    console.log("Requested embed: " + embedID);
+    console.log("User requested an embed: " + embedID);
 
-    if (!url.endsWith(".json")) {
-      var html = `
+    try {
+      if (!url.endsWith(".json")) {
+        var html = `
       <title>` + embeds[embedID].title + `</title>
       <meta content="` + embeds[embedID].title + `" property="og:title">
       <meta content="` + embeds[embedID].description + `" property="og:description">
@@ -65,22 +66,28 @@ http.createServer(function(request, response) {
       <link type="application/json+oembed" href="./` + embedID + `.json" />
       `;
 
+        response.writeHead(200, {
+          'Content-Type': 'text/html'
+        });
+        response.end(html);
+      } else {
+        var json = {
+          provider_name: embeds[embedID].providerName,
+          provider_url: embeds[embedID].providerUrl,
+          author_name: embeds[embedID].authorUrl,
+          author_url: embeds[embedID].authorName,
+          type: (embeds[embedID].banner ? "photo" : "")
+        };
+        response.writeHead(200, {
+          'Content-Type': 'text/json'
+        });
+        response.end(json);
+      }
+    } catch (e) {
       response.writeHead(200, {
         'Content-Type': 'text/html'
       });
-      response.end(html);
-    } else {
-      var json = {
-        provider_name: embeds[embedID].providerName,
-        provider_url: embeds[embedID].providerUrl,
-        author_name: embeds[embedID].authorUrl,
-        author_url: embeds[embedID].authorName,
-        type: (embeds[embedID].banner ? "photo" : "")
-      };
-      response.writeHead(200, {
-        'Content-Type': 'text/json'
-      });
-      response.end(json);
+      response.end("The embed you requested no longer exists.");
     }
   } else {
     response.writeHead(200, {
