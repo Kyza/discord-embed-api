@@ -30,7 +30,7 @@ http.createServer(function(request, response) {
     response.writeHead(200, {
       'Content-Type': 'text/plain'
     });
-    response.end("I'm gonna send back an embed with this info: " + embeds.toString());
+    response.end("I'm gonna send back an embed with this info: " + JSON.stringify(embeds));
   } else {
     response.writeHead(200, {
       'Content-Type': 'text/plain'
