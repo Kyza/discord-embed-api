@@ -44,7 +44,14 @@ http.createServer(function(request, response) {
     response.writeHead(200, {
       'Content-Type': 'text/plain'
     });
-    response.end("I'm gonna send back an embed with this info: " + JSON.stringify(embeds, null, 2));
+    response.end("embedID");
+  } else if (url.startsWith("/get-embed/")) {
+    var embedID = url.replace("/get-embed/", "");
+
+    response.writeHead(200, {
+      'Content-Type': 'text/plain'
+    });
+    response.end(JSON.stringify(embeds[embedID], null, 2));
   } else {
     response.writeHead(200, {
       'Content-Type': 'text/plain'
