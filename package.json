@@ -1,0 +1,6 @@
+{
+  "name": "discord-embed-api",
+  "main": "index.js",
+  "dependencies": {
+  }
+}
