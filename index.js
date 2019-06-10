@@ -81,9 +81,10 @@ http.createServer(function(request, response) {
         response.writeHead(200, {
           'Content-Type': 'text/json'
         });
-        response.end(json);
+        response.end(JSON.stringify(json, null, 2));
       }
     } catch (e) {
+      console.error(e);
       response.writeHead(200, {
         'Content-Type': 'text/html'
       });
