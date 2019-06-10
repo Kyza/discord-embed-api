@@ -62,7 +62,7 @@ http.createServer(function(request, response) {
 
       ` + (embeds[embedID].banner ? `<meta name="twitter:card" content="summary_large_image">` : "") + `
 
-      <link type="application/json+oembed" href="./embed/` + embedID + `.json" />
+      <link type="application/json+oembed" href="./` + embedID + `.json" />
       `;
 
       response.writeHead(200, {
