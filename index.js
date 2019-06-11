@@ -40,9 +40,9 @@ http.createServer(function(request, response) {
 			embedJSON.id = embedJSON;
 
 	    response.writeHead(200, {
-	      'Content-Type': 'text/plain'
+	      'Content-Type': 'text/json'
 	    });
-	    response.end(embedJSON);
+	    response.end(JSON.stringify(embedJSON));
 	    console.log("Saved embed at ID: " + embedID);
     });
 
