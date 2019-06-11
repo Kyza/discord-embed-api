@@ -37,7 +37,7 @@ http.createServer(function(request, response) {
 			console.log(embedJSON);
 	    embeds[embedID] = embedJSON;
 
-			embedJSON.id = embedJSON;
+			embedJSON.id = embedID;
 
 	    response.writeHead(200, {
 	      'Content-Type': 'text/json'
