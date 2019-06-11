@@ -30,20 +30,34 @@ http.createServer(function(request, response) {
       requestData += data;
     });
     request.on("end", function() {
-			var embedID = randomString(20);
+      if (requestData.trim() != "") {
+        try {
+          var embedID = randomString(20);
 
-			embedJSON = JSON.parse(requestData);
+          embedJSON = JSON.parse(requestData);
 
-			console.log(embedJSON);
-	    embeds[embedID] = embedJSON;
+          console.log(embedJSON);
+          embeds[embedID] = embedJSON;
 
-			embedJSON.id = embedID;
+          embedJSON.id = embedID;
 
-	    response.writeHead(200, {
-	      'Content-Type': 'text/json'
-	    });
-	    response.end(JSON.stringify(embedJSON));
-	    console.log("Saved embed at ID: " + embedID);
+          response.writeHead(200, {
+            'Content-Type': 'text/json'
+          });
+          response.end(JSON.stringify(embedJSON));
+          console.log("Saved embed at ID: " + embedID);
+        } catch (e) {
+					response.writeHead(200, {
+	          'Content-Type': 'text/json'
+	        });
+	        response.end("Invalid POST JSON.");
+        }
+      } else {
+        response.writeHead(200, {
+          'Content-Type': 'text/json'
+        });
+        response.end("Invalid POST JSON.");
+      }
     });
 
   } else if (url.startsWith("/embed/")) {
