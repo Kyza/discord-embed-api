@@ -25,22 +25,14 @@ http.createServer(function(request, response) {
   } else if (url.startsWith("/create")) {
     console.log("User created an embed: " + url);
 
-    response.setEncoding('utf8');
-    response.on('data', function(body) {
-			var embedID = randomString(20);
-			while (embeds[embedID]) {
-				embedID = randomString(20);
-			}
+    console.log(JSON.parse(request.body));
+    embeds[embedID] = JSON.parse(request.body);
 
-			console.log(JSON.parse(body));
-			embeds[embedID] = JSON.parse(body);
-
-			response.writeHead(200, {
-				'Content-Type': 'text/plain'
-			});
-			response.end("/embed/" + embedID);
-			console.log("Saved embed at ID: " + embedID);
+    response.writeHead(200, {
+      'Content-Type': 'text/plain'
     });
+    response.end("/embed/" + embedID);
+    console.log("Saved embed at ID: " + embedID);
 
   } else if (url.startsWith("/embed/")) {
     var embedID = url.replace("/embed/", "").replace(".json", "");
