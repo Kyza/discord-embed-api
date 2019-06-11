@@ -32,13 +32,17 @@ http.createServer(function(request, response) {
     request.on("end", function() {
 			var embedID = randomString(20);
 
-			console.log(JSON.parse(requestData));
-	    embeds[embedID] = JSON.parse(requestData);
+			embedJSON = JSON.parse(requestData);
+
+			console.log(embedJSON);
+	    embeds[embedID] = embedJSON;
+
+			embedJSON.id = embedJSON;
 
 	    response.writeHead(200, {
 	      'Content-Type': 'text/plain'
 	    });
-	    response.end("/embed/" + embedID);
+	    response.end(embedJSON);
 	    console.log("Saved embed at ID: " + embedID);
     });
 
