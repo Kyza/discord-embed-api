@@ -25,28 +25,23 @@ http.createServer(function(request, response) {
   } else if (url.startsWith("/create")) {
     console.log("User created an embed: " + url);
 
-    var embedID = randomString(20);
-    while (embeds[embedID]) {
-      embedID = randomString(20);
-    }
+    response.setEncoding('utf8');
+    response.on('data', function(body) {
+			var embedID = randomString(20);
+			while (embeds[embedID]) {
+				embedID = randomString(20);
+			}
 
-    embeds[embedID] = {
-      providerName: "providerName",
-      providerUrl: "https://provider.url/",
-      authorName: "authorName",
-      authorUrl: "https://author.url/",
-      title: "title",
-      description: "description",
-      imageUrl: "https://imageog.flaticon.com/icons/png/512/25/25694.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=FFFFFFFF",
-      banner: true,
-      color: "#7bbe17"
-    };
+			console.log(JSON.parse(body));
+			embeds[embedID] = JSON.parse(body);
 
-    response.writeHead(200, {
-      'Content-Type': 'text/plain'
+			response.writeHead(200, {
+				'Content-Type': 'text/plain'
+			});
+			response.end("/embed/" + embedID);
+			console.log("Saved embed at ID: " + embedID);
     });
-    response.end("/embed/" + embedID);
-    console.log("Saved embed at ID: " + embedID);
+
   } else if (url.startsWith("/embed/")) {
     var embedID = url.replace("/embed/", "").replace(".json", "");
     console.log("User requested an embed: " + embedID);
