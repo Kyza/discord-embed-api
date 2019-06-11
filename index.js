@@ -30,6 +30,8 @@ http.createServer(function(request, response) {
       requestData += data;
     });
     request.on("end", function() {
+			var embedID = randomString(20);
+
 			console.log(JSON.parse(requestData));
 	    embeds[embedID] = JSON.parse(requestData);
 
