@@ -25,14 +25,20 @@ http.createServer(function(request, response) {
   } else if (url.startsWith("/create")) {
     console.log("User created an embed: " + url);
 
-    console.log(JSON.parse(request.body));
-    embeds[embedID] = JSON.parse(request.body);
-
-    response.writeHead(200, {
-      'Content-Type': 'text/plain'
+    var requestData = "";
+    request.on("data", function(data) {
+      requestData += data;
     });
-    response.end("/embed/" + embedID);
-    console.log("Saved embed at ID: " + embedID);
+    request.on("end", function() {
+			console.log(JSON.parse(requestData));
+	    embeds[embedID] = JSON.parse(requestData);
+
+	    response.writeHead(200, {
+	      'Content-Type': 'text/plain'
+	    });
+	    response.end("/embed/" + embedID);
+	    console.log("Saved embed at ID: " + embedID);
+    });
 
   } else if (url.startsWith("/embed/")) {
     var embedID = url.replace("/embed/", "").replace(".json", "");
