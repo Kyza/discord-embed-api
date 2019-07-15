@@ -85,11 +85,11 @@ http.createServer(function(request, response) {
         response.end(html + "This page isn't meant to be viewed by users.");
       } else {
         var json = {
+          title: embeds[embedID].title,
           provider_name: embeds[embedID].providerName,
           provider_url: embeds[embedID].providerUrl,
           author_name: embeds[embedID].authorName,
-          author_url: embeds[embedID].authorUrl,
-          type: (embeds[embedID].banner ? "photo" : "")
+          author_url: embeds[embedID].authorUrl
         };
         response.writeHead(200, {
           'Content-Type': 'text/json'
