@@ -13,6 +13,15 @@ function randomString(length) {
   return result;
 }
 
+function escapeHtml(unsafe) {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 http.createServer(function(request, response) {
   var url = decodeURIComponent(request.url);
   if (url == "/favicon.ico") {
@@ -68,11 +77,11 @@ http.createServer(function(request, response) {
       if (!url.endsWith(".json")) {
         if (embeds[embedID]) {
           var html = `
-      <title>` + embeds[embedID].title + `</title>
-      <meta content="` + embeds[embedID].description + `" property="og:description">
-			<meta content="` + embeds[embedID].image + `" property="og:image">
+      <title>` + escapeHtml(embeds[embedID].title) + `</title>
+      <meta content="` + escapeHtml(embeds[embedID].description) + `" property="og:description">
+			<meta content="` + escapeHtml(embeds[embedID].image) + `" property="og:image">
 			<link type="application/json+oembed" href="https://discord-embed-api.herokuapp.com/embed/` + embedID + `.json" />
-			<meta content="` + embeds[embedID].color + `" name="theme-color">
+			<meta content="` + escapeHtml(embeds[embedID].color) + `" name="theme-color">
       ` + (embeds[embedID].banner ? `<meta name="twitter:card" content="summary_large_image">` : "");
 
           response.writeHead(200, {
@@ -80,11 +89,11 @@ http.createServer(function(request, response) {
           });
           response.end(html + "This page isn't meant to be viewed by users.");
         } else {
-					response.writeHead(200, {
+          response.writeHead(200, {
             'Content-Type': 'text/html'
           });
           response.end("This page isn't meant to be viewed by users.");
-				}
+        }
       } else {
         var json = {
           title: embeds[embedID].title,
