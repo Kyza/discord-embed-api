@@ -68,7 +68,6 @@ http.createServer(function(request, response) {
       if (!url.endsWith(".json")) {
         var html = `
       <title>` + embeds[embedID].title + `</title>
-      <meta content="` + embeds[embedID].title + `" property="og:title">
       <meta content="` + embeds[embedID].description + `" property="og:description">
       <meta content="` + embeds[embedID].description + `" name="description">
       <meta content="` + embeds[embedID].image + `" property="og:image">
