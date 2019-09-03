@@ -47,10 +47,10 @@ http.createServer(function(request, response) {
           response.end(JSON.stringify(embedJSON));
           console.log("Saved embed at ID: " + embedID);
         } catch (e) {
-					response.writeHead(200, {
-	          'Content-Type': 'text/json'
-	        });
-	        response.end("Invalid POST JSON.");
+          response.writeHead(200, {
+            'Content-Type': 'text/json'
+          });
+          response.end("Invalid POST JSON.");
         }
       } else {
         response.writeHead(200, {
@@ -66,7 +66,8 @@ http.createServer(function(request, response) {
 
     try {
       if (!url.endsWith(".json")) {
-        var html = `
+        if (embeds[embedID]) {
+          var html = `
       <title>` + embeds[embedID].title + `</title>
       <meta content="` + embeds[embedID].description + `" property="og:description">
 			<meta content="` + embeds[embedID].image + `" property="og:image">
@@ -74,17 +75,23 @@ http.createServer(function(request, response) {
 			<meta content="` + embeds[embedID].color + `" name="theme-color">
       ` + (embeds[embedID].banner ? `<meta name="twitter:card" content="summary_large_image">` : "");
 
-        response.writeHead(200, {
-          'Content-Type': 'text/html'
-        });
-        response.end(html + "This page isn't meant to be viewed by users.");
+          response.writeHead(200, {
+            'Content-Type': 'text/html'
+          });
+          response.end(html + "This page isn't meant to be viewed by users.");
+        } else {
+					response.writeHead(200, {
+            'Content-Type': 'text/html'
+          });
+          response.end("This page isn't meant to be viewed by users.");
+				}
       } else {
         var json = {
           title: embeds[embedID].title,
           author_name: embeds[embedID].authorName,
           author_url: embeds[embedID].authorUrl,
-					provider_name: embeds[embedID].providerName,
-					provider_url: embeds[embedID].providerUrl
+          provider_name: embeds[embedID].providerName,
+          provider_url: embeds[embedID].providerUrl
         };
         response.writeHead(200, {
           'Content-Type': 'text/json'
@@ -93,10 +100,18 @@ http.createServer(function(request, response) {
       }
     } catch (e) {
       console.error(e);
+
+			var html = `
+	<title>Invalid Embed</title>
+	<meta content="The embed you requested is invalid or no longer exists." property="og:description">
+	<meta content="https://github.com/KyzaGitHub/discord-embed-api/raw/master/invalid.png" property="og:image">
+	<meta content="#cc2d2d" name="theme-color">`;
+
+
       response.writeHead(200, {
         'Content-Type': 'text/html'
       });
-      response.end("The embed you requested is invalid or no longer exists.");
+      response.end(html + "The embed you requested is invalid or no longer exists.");
     }
   } else {
     response.writeHead(200, {
