@@ -68,16 +68,11 @@ http.createServer(function(request, response) {
       if (!url.endsWith(".json")) {
         var html = `
       <title>` + embeds[embedID].title + `</title>
-      <meta content="` + embeds[embedID].title + `" property="og:title">
-      <meta content="` + embeds[embedID].description + `" property="og:description">
-      <meta content="` + embeds[embedID].description + `" name="description">
-      <meta content="` + embeds[embedID].imageUrl + `" property="og:image">
+			<meta content="` + embeds[embedID].description + `" property="og:description">
+			<meta content="` + embeds[embedID].imageUrl + `" property="og:image">
+			<link type="application/json+oembed" href="https://discord-embed-api.herokuapp.com/embed/` + embedID + `.json" />
       <meta content="` + embeds[embedID].color + `" name="theme-color">
-
-      ` + (embeds[embedID].banner ? `<meta name="twitter:card" content="summary_large_image">` : "") + `
-
-      <link type="application/json+oembed" href="https://discord-embed-api.herokuapp.com/embed/` + embedID + `.json" />
-      `;
+      ` + (embeds[embedID].banner ? `<meta name="twitter:card" content="summary_large_image">` : "");
 
         response.writeHead(200, {
           'Content-Type': 'text/html'
@@ -85,16 +80,16 @@ http.createServer(function(request, response) {
         response.end(html + "This page isn't meant to be viewed by users.");
       } else {
         var json = {
-          title: embeds[embedID].title,
-          provider_name: embeds[embedID].providerName,
-          provider_url: embeds[embedID].providerUrl,
+					title: embeds[embedID].title,
           author_name: embeds[embedID].authorName,
-          author_url: embeds[embedID].authorUrl
+          author_url: embeds[embedID].authorUrl,
+					provider_name: embeds[embedID].providerName,
+					provider_url: embeds[embedID].providerUrl
         };
         response.writeHead(200, {
           'Content-Type': 'text/json'
         });
-        response.end(JSON.stringify(json, null, 2));
+        response.end(JSON.stringify(json));
       }
     } catch (e) {
       console.error(e);
