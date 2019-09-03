@@ -101,17 +101,10 @@ http.createServer(function(request, response) {
     } catch (e) {
       console.error(e);
 
-			var html = `
-	<title>Invalid Embed</title>
-	<meta content="The embed you requested is invalid or no longer exists." property="og:description">
-	<meta content="https://github.com/KyzaGitHub/discord-embed-api/raw/master/invalid.png" property="og:image">
-	<meta content="#cc2d2d" name="theme-color">`;
-
-
       response.writeHead(200, {
         'Content-Type': 'text/html'
       });
-      response.end(html + "The embed you requested is invalid or no longer exists.");
+      response.end("The embed you requested is invalid or no longer exists.");
     }
   } else {
     response.writeHead(200, {
