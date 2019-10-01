@@ -41,7 +41,7 @@ http.createServer(function(request, response) {
     request.on("end", function() {
       if (requestData.trim() != "") {
         try {
-          var embedID = randomString(20);
+          var embedID = randomString(10);
 
           embedJSON = JSON.parse(requestData);
 
