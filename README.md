@@ -10,7 +10,7 @@ Hosted with Heroku so I don't have to worry about a lot of stuff such as storing
  - What embed ID that data was saved to.
  - Your IP address.
 
-I am not responsable the releasing of any personal information within logged data.
+I am not responsable for the releasing of any personal information within logged data.
 
 # Why is this data logged?
 
