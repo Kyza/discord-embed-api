@@ -1,5 +1,8 @@
 {
   "name": "discord-embed-api",
   "main": "index.js",
-  "dependencies": {}
+  "dependencies": {
+    "faunadb": "^3.0.1",
+    "vercel": "^20.1.1"
+  }
 }
