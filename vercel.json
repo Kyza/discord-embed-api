@@ -1,6 +1,6 @@
 {
     "routes": [
       { "src": "/create", "dest": "/api/create" },
-      { "src": "/([^/]+)", "dest": "/api" }
+      { "src": "/embed/([^/]+)", "dest": "/api" }
     ]
   }
