@@ -60,7 +60,7 @@ module.exports = async (request, response) => {
               (embed.banner
                 ? `<meta name="twitter:card" content="summary_large_image">`
                 : "");
-
+                console.log(html)
             response.writeHead(200, {
               "Content-Type": "text/html"
             });
