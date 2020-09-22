@@ -73,8 +73,8 @@ module.exports = async (request, response) => {
           }
         } else {
           const type = {};
-          if (embed.type || embed.description) {
-            type.type = embed.type || embed.description
+          if (embed.type || embed.description || (embed.providerName && !(embed.authorName || embed.title || embed.description))) {
+            type.type = embed.type || embed.description || undefined
           } else {
             type.type = 'photo'
           }
