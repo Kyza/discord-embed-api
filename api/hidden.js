@@ -48,7 +48,7 @@ module.exports = async (request, response) => {
               (escapeHtml(embed.description) +
               `" property="og:description">
 			<meta content="` || '') +
-              ((escapeHtml(embed.image)) +
+              ((escapeHtml(embed.image) || 'https://img.bigdumb.gq/1x1.png') +
               `" property="og:image">` || '') + `
 			<link type="application/json+oembed" href="https://em.bigdumb.gq/embed/` +
               embedID +
@@ -72,6 +72,12 @@ module.exports = async (request, response) => {
             response.end("This page isn't meant to be viewed by users.");
           }
         } else {
+          const type = {};
+          if (embed.type || embed.description || (embed.providerName && !(embed.authorName || embed.title || embed.description))) {
+            type.type = embed.type || embed.description || undefined
+          } else {
+            type.type = 'photo'
+          }
           var json = {
             title: embed.title,
             description: embed.description,
@@ -79,6 +85,7 @@ module.exports = async (request, response) => {
             author_url: embed.authorUrl,
             provider_name: embed.providerName,
             provider_url: embed.providerUrl,
+            ...type
           };
           response.writeHead(200, {
             "Content-Type": "text/json"
