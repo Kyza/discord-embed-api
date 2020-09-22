@@ -48,7 +48,7 @@ module.exports = async (request, response) => {
               escapeHtml(embed.description) +
               `" property="og:description">
 			<meta content="` +
-              escapeHtml(embed.image) +
+              escapeHtml(embed.image) || 'https://img.bigdumb.gq/1x1.png' +
               `" property="og:image">
 			<link type="application/json+oembed" href="https://em.bigdumb.gq/embed/` +
               embedID +
@@ -77,7 +77,8 @@ module.exports = async (request, response) => {
             author_name: embed.authorName,
             author_url: embed.authorUrl,
             provider_name: embed.providerName,
-            provider_url: embed.providerUrl
+            provider_url: embed.providerUrl,
+            type: embed.type || 'photo'
           };
           response.writeHead(200, {
             "Content-Type": "text/json"
