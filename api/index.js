@@ -74,6 +74,7 @@ module.exports = async (request, response) => {
         } else {
           var json = {
             title: embed.title,
+            description: embed.description,
             author_name: embed.authorName,
             author_url: embed.authorUrl,
             provider_name: embed.providerName,
