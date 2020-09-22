@@ -48,7 +48,7 @@ module.exports = async (request, response) => {
               escapeHtml(embed.description) +
               `" property="og:description">
 			<meta content="` +
-              escapeHtml(embed.image) || 'https://img.bigdumb.gq/1x1.png' +
+              escapeHtml(embed.image) +
               `" property="og:image">
 			<link type="application/json+oembed" href="https://em.bigdumb.gq/embed/` +
               embedID +
