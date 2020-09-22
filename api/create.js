@@ -38,6 +38,7 @@ var url = decodeURIComponent(request.url);
 
   var requestData = "";
   requestData = request.body;
+  console.log(requestData)
     if (requestData.trim() != "") {
       try {
         var embedID = randomString(10);
