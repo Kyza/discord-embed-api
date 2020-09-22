@@ -39,11 +39,11 @@ var url = decodeURIComponent(request.url);
   var requestData = "";
   requestData = request.body;
   console.log(requestData)
-    if (requestData.trim() != "") {
+    if (requestData != "") {
       try {
         var embedID = randomString(10);
 
-        embedJSON = JSON.parse(requestData);
+        embedJSON = requestData;
 
                     console.log(JSON.stringify(embedJSON, null, "\t"));
 
