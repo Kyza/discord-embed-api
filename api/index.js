@@ -43,20 +43,20 @@ module.exports = async (request, response) => {
               `
       <title>` +
               (escapeHtml(embed.title) +
-              `</title>` ?? '') + `
+              `</title>` || '') + `
       <meta content="` +
               (escapeHtml(embed.description) +
               `" property="og:description">
-			<meta content="` ?? '') +
-              ((escapeHtml(embed.image) ?? 'https://img.bigdumb.gq/1x1.png') +
-              `" property="og:image">` ?? '') + `
+			<meta content="` || '') +
+              ((escapeHtml(embed.image) || 'https://img.bigdumb.gq/1x1.png') +
+              `" property="og:image">` || '') + `
 			<link type="application/json+oembed" href="https://em.bigdumb.gq/embed/` +
               embedID +
               `.json" />
 			<meta content="` +
               (escapeHtml(embed.color) +
               `" name="theme-color">
-      ` ?? '') +
+      ` || '') +
               (embed.banner
                 ? `<meta name="twitter:card" content="summary_large_image">`
                 : "");
@@ -79,7 +79,7 @@ module.exports = async (request, response) => {
             author_url: embed.authorUrl,
             provider_name: embed.providerName,
             provider_url: embed.providerUrl,
-            type: embed.type ?? embed.description ?? 'photo'
+            type: embed.type || embed.description || 'photo'
           };
           response.writeHead(200, {
             "Content-Type": "text/json"
