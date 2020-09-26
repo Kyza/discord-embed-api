@@ -2,13 +2,13 @@
 
 My API for creating custom link embeds for Discord.
 
-Hosted with Heroku so I don't have to worry about a lot of stuff such as storing data efficiently; especially since this API does extremely minimal calculations. Everything is saved in RAM so embed links will be purged when it (probably never) uses up all of the Heroku server's allocated RAM.
+Runs on Vercel, using FaunaDB as a database and LogDNA as a log drain.
 
 # Data That's Logged
 
  - Embed data.
  - What embed ID that data was saved to.
- - Your IP address.
+ - Your IP address (MD5 hashed so i do not know your location lol).
 
 I am not responsable for the releasing of any personal information within logged data.
 
@@ -16,7 +16,7 @@ I am not responsable for the releasing of any personal information within logged
 
 ## IP
 
-Your IP address is logged to help moderate the API.
+Your hashed IP address is logged to help moderate the API.
 
 I don't allow malicious links such as:
 
@@ -24,7 +24,7 @@ I don't allow malicious links such as:
  - Malware links.
  - Anything potentially harmful to any user.
 
-In the case that this happens, the user will be IP banned from this API. You can appeal your ban or report malicious embeds on [my Discord server](https://discord.gg/c9ESSur).
+In the case that this happens, the user will be IP banned from this API. You can appeal your ban or report malicious embeds on [my Discord server](https://discord.gg/76Hk8zp).
 
 ## Embed Data
 
