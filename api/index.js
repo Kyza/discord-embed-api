@@ -31,6 +31,7 @@ function escapeHtml(unsafe) {
 module.exports = async (request, response) => {
       const url = request.url
       var embedID = url.replace('/', '').replace('embed/', '').replace(".json", "");
+      if (request.headers["User-Agent"].includes('Discordbot')) {
       console.log("User requested an embed: " + embedID);
 
       try {
@@ -93,6 +94,12 @@ module.exports = async (request, response) => {
         });
         response.end("The embed you requested is invalid or no longer exists." + e);
       }
+    } else{
+      response.writeHead(200, {
+        "Content-Type": "text/html"
+      });
+      response.end("This page isn't meant to be viewed by users.");
+    }
     }
 
 console.log("Server started!");
