@@ -45,8 +45,6 @@ var url = decodeURIComponent(request.url);
 
         embedJSON = requestData;
 
-                    console.log(JSON.stringify(embedJSON, null, "\t"));
-
         embedJSON.id = embedID;
 
         await write(embedJSON)
