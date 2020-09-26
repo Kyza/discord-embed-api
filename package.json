@@ -3,6 +3,7 @@
   "main": "index.js",
   "dependencies": {
     "faunadb": "^3.0.1",
+    "js-md5": "^0.7.3",
     "vercel": "^20.1.1"
   }
 }

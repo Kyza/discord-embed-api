@@ -1,3 +1,4 @@
+md5 = require('js-md5');
 async function get(id) {
   let settings;
   try {
@@ -13,17 +14,6 @@ async function get(id) {
           return false
       }
   return settings
-}
-
-String.prototype.hashCode = function(){
-	var hash = 0;
-	if (this.length == 0) return hash;
-	for (i = 0; i < this.length; i++) {
-		char = this.charCodeAt(i);
-		hash = ((hash<<5)-hash)+char;
-		hash = hash & hash; // Convert to 32bit integer
-	}
-	return hash;
 }
 
 
@@ -63,7 +53,7 @@ var url = decodeURIComponent(request.url);
       ? request.connection.socket.remoteAddress
       : null);
 
-  console.log(ip.hashCode() + " created an embed: " + url);
+  console.log(md5(ip) + " created an embed: " + url);
 
   var requestData = "";
   requestData = request.body;
@@ -76,7 +66,7 @@ var url = decodeURIComponent(request.url);
 
         embedJSON.id = embedID;
 
-        embedJSON.creator = ip.hashCode()
+        embedJSON.creator = md5(ip)
         if (await get(embedJSON.creator)) {
           response.writeHead(200, {
             "Content-Type": "text/json"
