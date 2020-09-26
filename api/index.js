@@ -60,7 +60,6 @@ module.exports = async (request, response) => {
               (embed.banner
                 ? `<meta name="twitter:card" content="summary_large_image">`
                 : "");
-                console.log(html)
             response.writeHead(200, {
               "Content-Type": "text/html"
             });
@@ -72,12 +71,6 @@ module.exports = async (request, response) => {
             response.end("This page isn't meant to be viewed by users.");
           }
         } else {
-          const type = {};
-          if (embed.type || embed.description || (embed.providerName && !(embed.authorName || embed.title || embed.description))) {
-            type.type = embed.type || embed.description || undefined
-          } else {
-            type.type = 'photo'
-          }
           var json = {
             title: embed.title,
             description: embed.description,
@@ -85,7 +78,7 @@ module.exports = async (request, response) => {
             author_url: embed.authorUrl,
             provider_name: embed.providerName,
             provider_url: embed.providerUrl,
-            ...type
+            type: embed.type || embed.description || (embed.providerName && !(embed.authorName || embed.title || embed.description)) ? embed.type || embed.description || undefined : 'photo'
           };
           response.writeHead(200, {
             "Content-Type": "text/json"
